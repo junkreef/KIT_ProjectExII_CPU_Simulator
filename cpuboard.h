@@ -46,3 +46,35 @@ typedef struct cpuboard {
 #define	RUN_HALT	0
 #define	RUN_STEP	1
 int	step(Cpub *);
+
+
+/*=============================================================================
+ *   Operation defines
+ *===========================================================================*/
+#define is_NOP(OP)      (OP&0xf8 == 0x00)
+#define is_HLT(OP)      (OP&0xfc == 0x0c)
+
+#define is_OUT(OP)      (OP&0xf8 == 0x10)
+#define is_IN(OP)       (OP&0xf8 == 0x18)
+
+#define is_RCF(OP)      (OP&0xf8 == 0x20)
+#define is_SCF(OP)      (OP&0xf8 == 0x28)
+
+#define is_LD(OP)       (OP&0xf0 == 0x60)
+#define is_ST(OP)       (OP&0xf0 == 0x70)
+
+#define is_ADD(OP)      (OP&0xf0 == 0xb0)
+#define is_ADC(OP)      (OP&0xf0 == 0x90)
+#define is_SUB(OP)      (OP&0xf0 == 0xa0)
+#define is_SBC(OP)      (OP&0xf0 == 0x80)
+#define is_CMP(OP)      (OP&0xf0 == 0xf0)
+#define is_AND(OP)      (OP&0xf0 == 0xe0)
+#define is_OR(OP)       (OP&0xf0 == 0xd0)
+#define is_EOR(OP)      (OP&0xf0 == 0xc0)
+
+#define is_SSM(OP)      (OP&0xf4 == 0x40)
+#define is_RSM(OP)      (OP&0xf4 == 0x44)
+
+#define is_BBC(OP)      (OP&0xf0 == 0x30)
+#define is_JAL(OP)      (OP&0xff == 0x0a)
+#define is_JR(OP)       (OP&0xff == 0x0b)
