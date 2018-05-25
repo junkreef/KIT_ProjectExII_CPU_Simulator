@@ -79,9 +79,9 @@ int	step(Cpub *);
 #define is_JAL(OP)      (OP&0xff == 0x0a)
 #define is_JR(OP)       (OP&0xff == 0x0b)
 
-#define extract_A(OP)   (OP&0x08)
-#define extract_B(OP)   (OP&0x07)
-#define extract_SM(OP)  (OP&0x03)
-#define extract_BC(OP)  (OP&0x0f)
+#define mask_A(OP)   (OP&0x08)
+#define mask_B(OP)   (OP&0x07)
+#define mask_SM(OP)  (OP&0x03)
+#define mask_BC(OP)  (OP&0x0f)
 
 #define GET_CURRENT_PC (cpub->mem[cpub->pc])
