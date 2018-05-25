@@ -15,49 +15,50 @@
 int
 step(Cpub *cpub)
 {
-    if(is_NOP(cpub->pc)){
+    Uword op = GET_CURRENT_PC;
+    if(is_NOP(op)){
 
-    }else if(is_HLT(cpub->pc)){
+    }else if(is_HLT(op)){
 
-    }else if(is_HLT(cpub->pc)) {
+    }else if(is_HLT(op)) {
 
-    }else if(is_OUT(cpub->pc)){
+    }else if(is_OUT(op)){
 
-    }else if(is_IN(cpub->pc)){
+    }else if(is_IN(op)){
 
-    }else if(is_RCF(cpub->pc)){
+    }else if(is_RCF(op)){
 
-    }else if(is_SCF(cpub->pc)){
+    }else if(is_SCF(op)){
 
-    }else if(is_LD(cpub->pc)){
+    }else if(is_LD(op)){
 
-    }else if(is_ST(cpub->pc)){
+    }else if(is_ST(op)){
 
-    }else if(is_ADD(cpub->pc)){
+    }else if(is_ADD(op)){
 
-    }else if(is_ADC(cpub->pc)){
+    }else if(is_ADC(op)){
 
-    }else if(is_SUB(cpub->pc)){
+    }else if(is_SUB(op)){
 
-    }else if(is_SBC(cpub->pc)){
+    }else if(is_SBC(op)){
 
-    }else if(is_CMP(cpub->pc)){
+    }else if(is_CMP(op)){
 
-    }else if(is_AND(cpub->pc)){
+    }else if(is_AND(op)){
 
-    }else if(is_OR(cpub->pc)){
+    }else if(is_OR(op)){
 
-    }else if(is_EOR(cpub->pc)){
+    }else if(is_EOR(op)){
 
-    }else if(is_SSM(cpub->pc)){
+    }else if(is_SSM(op)){
 
-    }else if(is_RSM(cpub->pc)){
+    }else if(is_RSM(op)){
 
-    }else if(is_BBC(cpub->pc)){
+    }else if(is_BBC(op)){
 
-    }else if(is_JAL(cpub->pc)){
+    }else if(is_JAL(op)){
 
-    }else if(is_JR(cpub->pc)){
+    }else if(is_JR(op)){
 
     }
 
