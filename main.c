@@ -98,7 +98,7 @@ main()
 		 *   Prompt
 		 */
 		fprintf(stderr,"CPU%d,PC=0x%x> ",cpub_id,cpub->pc);
-		/* fflush(stderr); */
+		fflush(stderr);
 
 		/*
 		 *   Input a command line
@@ -119,6 +119,7 @@ main()
 		   case 'i':
 			if( step(cpub) == RUN_HALT ) {
 				fprintf(stderr,"Program Halted.\n");
+                fflush(stderr);
 			}
 			break;
 		   case 'c':
@@ -197,6 +198,7 @@ cont(Cpub *cpub, char *straddr)
 		sscanf(straddr,"%x",&addr);
 		if( addr < 0 || addr >= IMEMORY_SIZE ) {
 			fprintf(stderr,"Invalid address: 0x%x\n",addr);
+            fflush(stderr);
 			return;
 		}
 		breakp = addr;
@@ -216,6 +218,7 @@ cont(Cpub *cpub, char *straddr)
 			return;
 		}
 	} while( cpub->pc != breakp );
+    fflush(stderr);
 }
 
 
@@ -234,6 +237,7 @@ display_regs(Cpub *cpub)
 	fprintf(stderr,"\tibuf=%x:0x%02x(%d,%u)    obuf=%x:0x%02x(%d,%u)\n",
 		cpub->ibuf->flag,DispRegVec(cpub->ibuf->buf),
 		cpub->obuf.flag,DispRegVec(cpub->obuf.buf));
+    fflush(stderr);
 }
 
 
@@ -290,6 +294,7 @@ set_reg(Cpub *cpub, char *regname, char *strval)
 	 *   For confirmation
 	 */
 	display_regs(cpub);
+    fflush(stderr);
 }
 
 
@@ -311,6 +316,7 @@ display_mem(Cpub *cpub, char *straddr)
 	}
 
 	display_mem_line(cpub,(Addr)MemLineBase(addr));
+    fflush(stderr);
 }
 
 
@@ -326,6 +332,7 @@ display_mem_line(Cpub *cpub, Addr addr)
 		}
 	}
 	fprintf(stderr,"\n");
+    fflush(stderr);
 }
 
 
@@ -350,12 +357,14 @@ set_mem(Cpub *cpub, char *straddr, char *strval)
 	sscanf(straddr,"%x",&addr);
 	if( addr > MEMORY_SIZE ) {
 		fprintf(stderr,"Invalid address (out of range): 0x%x\n",addr);
+        fflush(stderr);
 		return;
 	}
 
 	sscanf(strval,"%x",&value);
 	if( value > 0xff ) {
 		fprintf(stderr,"Invalid value (out of range): 0x%x\n",value);
+        fflush(stderr);
 		return;
 	}
 
@@ -378,6 +387,7 @@ read_mem_file(Cpub *cpub, char *file)
 
 	if( (fp = fopen(file,"r")) == NULL ) {
 		fprintf(stderr,"Unable to open %s\n",file);
+        fflush(stderr);
 		return;
 	}
 
@@ -393,7 +403,9 @@ read_mem_file(Cpub *cpub, char *file)
 			if( !strcmp(token+1,"data") ) {
 				area = 0x100;
 			} else {
-				fprintf(stderr,"Unknown directive: %s\n",token);				goto error;
+				fprintf(stderr,"Unknown directive: %s\n",token);
+                fflush(stderr);
+                goto error;
 			}
 
 			/*
@@ -403,6 +415,7 @@ read_mem_file(Cpub *cpub, char *file)
 			if( addr > 0xff ) {
 				fprintf(stderr,"Invalid address: %s %x\n",
 								token,addr);
+                fflush(stderr);
 				goto error;
 			}
 			addr |= area;
@@ -411,6 +424,7 @@ read_mem_file(Cpub *cpub, char *file)
 			if( word > 0xff ) {
 				fprintf(stderr,"Invalid value at addr=0x%03x: "
 							"0x%x\n",addr,word);
+                fflush(stderr);
 				goto error;
 			}
 			cpub->mem[addr++] = word;
@@ -429,12 +443,14 @@ void
 cmd_syntax_error(void)
 {
 	fprintf(stderr,"Command syntax error. Type \'h\' for help.\n");
+    fflush(stderr);
 }
 
 void
 unknown_command(void)
 {
 	fprintf(stderr,"Unknown command. Type \'h\' for help.\n");
+    fflush(stderr);
 }
 
 
