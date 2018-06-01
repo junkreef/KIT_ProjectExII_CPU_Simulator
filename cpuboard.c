@@ -19,49 +19,69 @@ step(Cpub *cpub)
     Uword op = GET_CURRENT_PC;
     printf("PC=0x%02x Execute: ", cpub->pc);
     if(is_NOP(op)){
-
+        printf("NOP\n");
+        cpub->pc++;
+        return RUN_STEP;
     }else if(is_HLT(op)){
-
-    }else if(is_HLT(op)) {
-
+        printf("HLT\n");
+        return RUN_HALT;
     }else if(is_OUT(op)){
-
+        printf("OUT\n");
+        return op_out(cpub);
     }else if(is_IN(op)){
-
+        printf("IN\n");
+        return op_in(cpub);
     }else if(is_RCF(op)){
-
+        printf("RCF\n");
+        return op_rcf(cpub);
     }else if(is_SCF(op)){
-
+        printf("SCF\n");
+        return op_scf(cpub);
     }else if(is_LD(op)){
-
+        printf("LD\n");
+        return op_ld(cpub);
     }else if(is_ST(op)){
-
+        printf("ST\n");
+        return op_st(cpub);
     }else if(is_ADD(op)){
-
+        printf("ADD\n");
+        return op_add(cpub);
     }else if(is_ADC(op)){
-
+        printf("ADC\n");
+        return op_adc(cpub);
     }else if(is_SUB(op)){
-
+        printf("SUB\n");
+        return op_sub(cpub);
     }else if(is_SBC(op)){
-
+        printf("SBC\n");
+        return op_sbc(cpub);
     }else if(is_CMP(op)){
-
+        printf("CMP\n");
+        return op_cmp(cpub);
     }else if(is_AND(op)){
-
+        printf("AND\n");
+        return op_and(cpub);
     }else if(is_OR(op)){
-
+        printf("OR\n");
+        return op_or(cpub);
     }else if(is_EOR(op)){
-
+        printf("EOR\n");
+        return op_eor(cpub);
     }else if(is_SSM(op)){
-
+        printf("SSM\n");
+        return op_ssm(cpub);
     }else if(is_RSM(op)){
-
+        printf("RSM\n");
+        return op_rsm(cpub);
     }else if(is_BBC(op)){
-
+        printf("BBC\n");
+        return op_bbc(cpub);
     }else if(is_JAL(op)){
-
+        printf("JAL\n");
+        return op_jal(cpub);
     }else if(is_JR(op)){
-
+        printf("JR\n");
+        return op_jr(cpub);
     }
 
     fflush(stdout);

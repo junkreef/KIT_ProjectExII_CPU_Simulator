@@ -6,6 +6,33 @@
  *	Descrioption:	resource definition of the educational computer board
  */
 
+//******** Includes ********//
+#include "Operation/LD.h"
+#include "Operation/ST.h"
+#include "Operation/OUT.h"
+#include "Operation/IN.h"
+#include "Operation/RCF.h"
+#include "Operation/SCF.h"
+#include "Operation/ADD.h"
+#include "Operation/ADC.h"
+#include "Operation/SUB.h"
+#include "Operation/SBC.h"
+#include "Operation/CMP.h"
+#include "Operation/AND.h"
+#include "Operation/OR.h"
+#include "Operation/EOR.h"
+#include "Operation/SSM.h"
+#include "Operation/RSM.h"
+#include "Operation/BBC.h"
+#include "Operation/JAL.h"
+#include "Operation/JR.h"
+
+#include <stdint.h>
+
+#ifndef KIT_PROJECTEXII_CPU_SIMULATOR_CPU_H
+#define KIT_PROJECTEXII_CPU_SIMULATOR_CPU_H
+
+
 /*=============================================================================
  *   Architectural Data Types
  *===========================================================================*/
