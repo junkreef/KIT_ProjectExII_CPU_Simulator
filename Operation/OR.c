@@ -4,6 +4,16 @@
 
 #include "OR.h"
 
+/**
+* @brief Operation OR
+*
+* OR Operation simulator
+*
+* @param *cpub CPU State
+* @retval RUN_STEP CPU is not halted.
+* @retval RUN_HALT CPU is halted.
+*
+*/
 int op_or(Cpub *cpub){
     Uword *target, *operand;
 

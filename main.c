@@ -6,12 +6,15 @@
  *	Descrioption:	main profram (command interpreter)
  */
 
+
+// Includes
 #include	<stdio.h>
 #include	<stdlib.h>
 #include	<string.h>
+#include <unistd.h>
 #include	"cpuboard.h"
 
-
+// Function Prototypes
 void	help(void);
 int	init_cpub(void);
 void	cont(Cpub *, char *);
@@ -26,15 +29,19 @@ void	cmd_syntax_error(void);
 void	unknown_command(void);
 
 
-/*=============================================================================
- *   CPU Board States
- *===========================================================================*/
-Cpub	cpuboard[2];	/* CPU board state */
+//! CPU state
+Cpub	cpuboard[2];
 
 
-/*=============================================================================
- *   Command: Display a Help Menu
- *===========================================================================*/
+/**
+ * @brief Show help
+ *
+ * Show how to use interpreter commands
+ *
+ * @param None
+ * @retval void
+ *
+ */
 void
 help(void)
 {
@@ -59,9 +66,17 @@ help(void)
 }
 
 
-/*=============================================================================
- *   Initialization for the System Organization
- *===========================================================================*/
+
+
+/**
+* @brief Init System Organization
+*
+* Connect each other input buffer and output buffer
+*
+* @param None
+* @retval 0 Always return zero
+*
+*/
 int
 init_cpub(void)
 {
@@ -70,10 +85,16 @@ init_cpub(void)
 	return 0;
 }
 
-
-/*=============================================================================
- *   Main Routine: Command Interpreter
- *===========================================================================*/
+/**
+* @brief Main
+*
+* Main Routine: Command Interpreter
+*
+* @param None
+* @retval 0 exit successful
+* @retval others exit failure
+*
+*/
 int
 main()
 {
@@ -178,9 +199,16 @@ main()
 }
 
 
-/*=============================================================================
- *   Command: Continue(Start) Execution
- *===========================================================================*/
+/**
+* @brief Continue program
+*
+* Execute programs continuously
+*
+* @param *cpub CPU State
+* @param *straddr Break point address
+* @retval void
+*
+*/
 void
 cont(Cpub *cpub, char *straddr)
 {
@@ -214,6 +242,9 @@ cont(Cpub *cpub, char *straddr)
 			return;
 		}
 		if( count++ > MAX_EXEC_COUNT ) {
+			fflush(stdout);
+			fflush(stderr);
+			usleep(1000); // wait for printout data in buffer
 			fprintf(stderr,"Too Many Instructions are Executed.\n");
 			return;
 		}
@@ -222,11 +253,18 @@ cont(Cpub *cpub, char *straddr)
 }
 
 
-/*=============================================================================
- *   Command: Display Registers and Flags
- *===========================================================================*/
+
 #define	DispRegVec(R)	(Uword)(R),(Sword)(R),(Uword)(R)
 
+/**
+* @brief Display Registers and Flags
+*
+* Print current registers and flags status
+*
+* @param *cpub CPU State
+* @retval void
+*
+*/
 void
 display_regs(Cpub *cpub)
 {
@@ -241,9 +279,17 @@ display_regs(Cpub *cpub)
 }
 
 
-/*=============================================================================
- *   Command: Set a Register/Flag
- *===========================================================================*/
+/**
+* @brief Set registers
+*
+* Set registers as params shown
+*
+* @param *cpub CPU State
+* @param *regname Register name string which you want to set
+* @param *strval Pointer of values which you want to set
+* @retval void
+*
+*/
 void
 set_reg(Cpub *cpub, char *regname, char *strval)
 {
@@ -298,12 +344,19 @@ set_reg(Cpub *cpub, char *regname, char *strval)
 }
 
 
-/*=============================================================================
- *   Command: Display the Contents of the Main Memory
- *===========================================================================*/
+
 #define	MemLineBase(A)	((A) & ~0xf)
 
-
+/**
+* @brief Show memory contents
+*
+* Display memory data in hex dump style
+*
+* @param *cpub CPU State
+* @param *straddr Memory address you want to see
+* @retval void
+*
+*/
 void
 display_mem(Cpub *cpub, char *straddr)
 {
@@ -346,9 +399,17 @@ display_mem_all(Cpub *cpub)
 }
 
 
-/*=============================================================================
- *   Command: Write a Word to a Memory Location
- *===========================================================================*/
+/**
+* @brief Write data to memory
+*
+* Write 1 Byte data to memory
+*
+* @param *cpub CPU State
+* @param *straddr Memory address you want to write
+* @param *strval Pointer of 1 Byte data you want to write
+* @retval void
+*
+*/
 void
 set_mem(Cpub *cpub, char *straddr, char *strval)
 {
@@ -373,9 +434,16 @@ set_mem(Cpub *cpub, char *straddr, char *strval)
 }
 
 
-/*=============================================================================
- *   Command: Read a Program File
- *===========================================================================*/
+/**
+* @brief Write file to memory
+*
+* Write memory data file to memory
+*
+* @param *cpub CPU State
+* @param *file Path to file you want to write
+* @retval void
+*
+*/
 void
 read_mem_file(Cpub *cpub, char *file)
 {
@@ -436,9 +504,13 @@ read_mem_file(Cpub *cpub, char *file)
 }
 
 
-/*=============================================================================
- *   Error Handling
- *===========================================================================*/
+/**
+* @brief Syntax error handling
+*
+* @param None
+* @retval void
+*
+*/
 void
 cmd_syntax_error(void)
 {
@@ -446,11 +518,17 @@ cmd_syntax_error(void)
     fflush(stderr);
 }
 
+
+/**
+* @brief Unknown command error handling
+*
+* @param None
+* @retval void
+*
+*/
 void
 unknown_command(void)
 {
 	fprintf(stderr,"Unknown command. Type \'h\' for help.\n");
     fflush(stderr);
 }
-
-

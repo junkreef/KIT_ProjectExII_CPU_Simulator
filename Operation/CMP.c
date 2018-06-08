@@ -4,6 +4,16 @@
 
 #include "CMP.h"
 
+/**
+* @brief Operation CMP
+*
+* CMP Operation simulator
+*
+* @param *cpub CPU State
+* @retval RUN_STEP CPU is not halted.
+* @retval RUN_HALT CPU is halted.
+*
+*/
 int op_cmp(Cpub *cpub){
     Uword op = GET_CURRENT_PC;
     Uword *target, *operand, flags;
